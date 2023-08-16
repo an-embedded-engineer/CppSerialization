@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Common\CommonTypes.h" />
+    <ClInclude Include="Utility\Endian\Endian.h" />
+    <ClInclude Include="Serialization\Interface\Serializer.h" />
+    <ClInclude Include="Utility\Exception\ExceptionBase.h" />
+    <ClInclude Include="Utility\Exception\StackTracer.h" />
+    <ClInclude Include="Config\PlatformConfig.h" />
+    <ClInclude Include="Utility\String\StringFormat.h" />
+    <ClInclude Include="Utility\Exception\ExceptionTypes.h" />
+    <ClInclude Include="Utility\Exception\StackTrace.h" />
+    <ClInclude Include="Utility\Exception\SymbolInfo.h" />
+    <ClInclude Include="Utility\Exception\SymbolInfoGenerator.h" />
+    <ClInclude Include="Utility\Exception\ErrorInfo.h" />
+    <ClInclude Include="Utility\Exception\BackTraceGenerator.h" />
+    <ClInclude Include="Utility\Exception\AppException.h" />
+    <ClInclude Include="Utility\Exception\FatalException.h" />
+    <ClInclude Include="Utility\Endian\EndianType.h" />
+    <ClInclude Include="Utility\Binary\FloatIntConverter.h" />
+    <ClInclude Include="DomainModel\DomainModelDataTypes.h" />
+    <ClInclude Include="Serialization\Interface\Archive.h" />
+    <ClInclude Include="Serialization\Binary\BinarySerialization.h" />
+    <ClInclude Include="Serialization\Text\TextSerialization.h" />
+    <ClInclude Include="Serialization\Text\TextSerializer.h" />
+    <ClInclude Include="DomainModel\DataTypeTraits.h" />
+    <ClInclude Include="Utility\Binary\BinaryConverter.h" />
+    <ClInclude Include="Utility\TypeTraits\TypeTraits.h" />
+    <ClInclude Include="Serialization\Interface\SerializerFactory.h" />
+    <ClInclude Include="Debug\DataDumper.h" />
+    <ClInclude Include="Utility\Random\RandomGenerator.h" />
+    <ClInclude Include="Debug\RandomDataGenerator.h" />
+    <ClInclude Include="Serialization\Binary\BinarySerialization.hpp" />
+    <ClInclude Include="Serialization\Text\TextSerialization.hpp" />
+    <ClInclude Include="Debug\DataDumper.hpp" />
+    <ClInclude Include="Debug\RandomDataGenerator.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Utility\Exception\ExceptionBase.cpp" />
+    <ClCompile Include="Utility\Exception\StackTracer.cpp" />
+    <ClCompile Include="Utility\Exception\SymbolInfoGenerator.cpp" />
+    <ClCompile Include="Utility\Exception\BackTraceGenerator.cpp" />
+    <ClCompile Include="Utility\Exception\AppException.cpp" />
+    <ClCompile Include="Utility\Exception\FatalException.cpp" />
+    <ClCompile Include="Serialization\Interface\Archive.cpp" />
+    <ClCompile Include="Serialization\Binary\BinarySerializer.h" />
+    <ClCompile Include="Serialization\Binary\BinarySerialization.cpp" />
+    <ClCompile Include="Serialization\Text\TextSerialization.cpp" />
+    <ClCompile Include="Utility\Binary\BinaryConverter.cpp" />
+    <ClCompile Include="Debug\DataDumper.cpp" />
+    <ClCompile Include="Utility\Random\RandomGenerator.cpp" />
+    <ClCompile Include="Debug\RandomDataGenerator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
