@@ -1,4 +1,5 @@
-﻿#include "DomainModelDataTypes.h"
+﻿#include "UserDataTypes.h"
+#include "UserTypeOperations.h"
 #include "SerializerFactory.h"
 #include "DataDumper.h"
 #include "RandomDataGenerator.h"
@@ -19,19 +20,19 @@ void SerializeTest(const std::string& type_name)
 
     ss << "Serialize Test : " << type_name << std::endl;
 
-    debug::RandomDataGenerator::Generate(in_data);
+    cpp_lib::random::RandomDataGenerator::Generate(in_data);
 
     ss << "-----Before Dump----" << std::endl;
-    ss << debug::DataDumper::ToString(type_name, in_data);
+    ss << cpp_lib::dump::DataDumper::ToString(type_name, in_data);
     ss << "--------------------" << std::endl;
 
 #if SERIALIZE_MODE == SERIALIZE_MODE_TEXT
-    serialization::Serializer<T>& serializer = serialization::SerializerFactory<T>::CreateTextSerializer();
+    cpp_lib::serialization::Serializer<T>& serializer = cpp_lib::serialization::SerializerFactory<T>::CreateTextSerializer();
 #else
-    serialization::Serializer<T>& serializer = serialization::SerializerFactory<T>::CreateBinarySerializer();
+    cpp_lib::serialization::Serializer<T>& serializer = cpp_lib::serialization::SerializerFactory<T>::CreateBinarySerializer();
 #endif
 
-    serialization::Archive archive;
+    cpp_lib::serialization::Archive archive;
 
     serializer.Serialize(in_data, archive);
 
@@ -50,7 +51,7 @@ void SerializeTest(const std::string& type_name)
     serializer.Deserialize(archive, out_data);
 
     ss << "-----After Dump----" << std::endl;
-    ss << debug::DataDumper::ToString(type_name, out_data);
+    ss << cpp_lib::dump::DataDumper::ToString(type_name, out_data);
     ss << "--------------------" << std::endl;;
 
     std::cout << ss.str() << std::endl;
@@ -60,26 +61,26 @@ void SerializeTest(const std::string& type_name)
 
 int main()
 {
-    SerializeTest<dm::BoolMessage>("BoolMessage");
-    SerializeTest<dm::Int8Message>("Int8Message");
-    SerializeTest<dm::Int16Message>("Int16Message");
-    SerializeTest<dm::Int32Message>("Int32Message");
-    SerializeTest<dm::Int64Message>("Int64Message");
-    SerializeTest<dm::UInt8Message>("UInt8Message");
-    SerializeTest<dm::UInt16Message>("UInt16Message");
-    SerializeTest<dm::UInt32Message>("UInt32Message");
-    SerializeTest<dm::UInt64Message>("UInt64Message");
-    SerializeTest<dm::Float32Message>("Float32Message");
-    SerializeTest<dm::Float64Message>("Float64Message");
-    SerializeTest<dm::StringMessage>("StringMessage");
-    SerializeTest<dm::ArrayMessage>("ArrayMessage");
-    SerializeTest<dm::VectorMessage>("VectorMessage");
-    SerializeTest<dm::MapMessage>("MapMessage");
-    SerializeTest<dm::EnumMessage1>("EnumMessage1");
-    SerializeTest<dm::EnumMessage2>("EnumMessage2");
-    SerializeTest<dm::StrucMessage1>("StrucMessage1");
-    SerializeTest<dm::StrucMessage2>("StrucMessage2");
-    SerializeTest<dm::StrucMessage3>("StrucMessage3");
+    SerializeTest<app::BoolMessage>("BoolMessage");
+    SerializeTest<app::Int8Message>("Int8Message");
+    SerializeTest<app::Int16Message>("Int16Message");
+    SerializeTest<app::Int32Message>("Int32Message");
+    SerializeTest<app::Int64Message>("Int64Message");
+    SerializeTest<app::UInt8Message>("UInt8Message");
+    SerializeTest<app::UInt16Message>("UInt16Message");
+    SerializeTest<app::UInt32Message>("UInt32Message");
+    SerializeTest<app::UInt64Message>("UInt64Message");
+    SerializeTest<app::Float32Message>("Float32Message");
+    SerializeTest<app::Float64Message>("Float64Message");
+    SerializeTest<app::StringMessage>("StringMessage");
+    SerializeTest<app::ArrayMessage>("ArrayMessage");
+    SerializeTest<app::VectorMessage>("VectorMessage");
+    SerializeTest<app::MapMessage>("MapMessage");
+    SerializeTest<app::EnumMessage1>("EnumMessage1");
+    SerializeTest<app::EnumMessage2>("EnumMessage2");
+    SerializeTest<app::StrucMessage1>("StrucMessage1");
+    SerializeTest<app::StrucMessage2>("StrucMessage2");
+    SerializeTest<app::StrucMessage3>("StrucMessage3");
 
     return 0;
 }

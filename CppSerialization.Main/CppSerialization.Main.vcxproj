@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Debug;..\CppSerialization.Lib\DomainModel;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\Utility;..\CppSerialization.Lib\Utility\Binary;..\CppSerialization.Lib\Utility\Endian;..\CppSerialization.Lib\Utility\Exception;..\CppSerialization.Lib\Utility\Random;..\CppSerialization.Lib\Utility\String;..\CppSerialization.Lib\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Binary;..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Dump;..\CppSerialization.Lib\Endian;..\CppSerialization.Lib\Exception;..\CppSerialization.Lib\Random;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\String;..\CppSerialization.Lib\TypeTraits;.\UserTypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,7 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Debug;..\CppSerialization.Lib\DomainModel;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\Utility;..\CppSerialization.Lib\Utility\Binary;..\CppSerialization.Lib\Utility\Endian;..\CppSerialization.Lib\Utility\Exception;..\CppSerialization.Lib\Utility\Random;..\CppSerialization.Lib\Utility\String;..\CppSerialization.Lib\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Binary;..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Dump;..\CppSerialization.Lib\Endian;..\CppSerialization.Lib\Exception;..\CppSerialization.Lib\Random;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\String;..\CppSerialization.Lib\TypeTraits;.\UserTypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Debug;..\CppSerialization.Lib\DomainModel;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\Utility;..\CppSerialization.Lib\Utility\Binary;..\CppSerialization.Lib\Utility\Endian;..\CppSerialization.Lib\Utility\Exception;..\CppSerialization.Lib\Utility\Random;..\CppSerialization.Lib\Utility\String;..\CppSerialization.Lib\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Binary;..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Dump;..\CppSerialization.Lib\Endian;..\CppSerialization.Lib\Exception;..\CppSerialization.Lib\Random;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\String;..\CppSerialization.Lib\TypeTraits;.\UserTypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Debug;..\CppSerialization.Lib\DomainModel;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\Utility;..\CppSerialization.Lib\Utility\Binary;..\CppSerialization.Lib\Utility\Endian;..\CppSerialization.Lib\Utility\Exception;..\CppSerialization.Lib\Utility\Random;..\CppSerialization.Lib\Utility\String;..\CppSerialization.Lib\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\CppSerialization.Lib\Binary;..\CppSerialization.Lib\Common;..\CppSerialization.Lib\Config;..\CppSerialization.Lib\Dump;..\CppSerialization.Lib\Endian;..\CppSerialization.Lib\Exception;..\CppSerialization.Lib\Random;..\CppSerialization.Lib\Serialization;..\CppSerialization.Lib\Serialization\Interface;..\CppSerialization.Lib\Serialization\Binary;..\CppSerialization.Lib\Serialization\Text;..\CppSerialization.Lib\String;..\CppSerialization.Lib\TypeTraits;.\UserTypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="UserTypes\UserTypeOperations.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UserTypes\UserDataTypes.h" />
+    <ClInclude Include="UserTypes\UserDataTypeTraits.h" />
+    <ClInclude Include="UserTypes\UserTypeOperations.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,54 +19,49 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Debug\DataDumper.h" />
-    <ClInclude Include="Debug\DataDumper.hpp" />
-    <ClInclude Include="Debug\RandomDataGenerator.h" />
-    <ClInclude Include="Debug\RandomDataGenerator.hpp" />
-    <ClInclude Include="Serialization\Binary\BinarySerialization.hpp" />
-    <ClInclude Include="Serialization\Text\TextSerialization.hpp" />
-    <ClInclude Include="Utility\Random\RandomGenerator.h" />
+    <ClInclude Include="Dump\DataDumper.h" />
+    <ClInclude Include="Random\RandomDataGenerator.h" />
+    <ClInclude Include="Random\RandomGenerator.h" />
     <ClInclude Include="Serialization\Interface\SerializerFactory.h" />
-    <ClInclude Include="Utility\Binary\BinaryConverter.h" />
+    <ClInclude Include="Binary\BinaryConverter.h" />
     <ClInclude Include="Serialization\Binary\BinarySerialization.h" />
-    <ClInclude Include="DomainModel\DomainModelDataTypes.h" />
-    <ClInclude Include="DomainModel\DataTypeTraits.h" />
     <ClInclude Include="Serialization\Interface\Archive.h" />
     <ClInclude Include="Serialization\Text\TextSerialization.h" />
     <ClInclude Include="Serialization\Text\TextSerializer.h" />
-    <ClInclude Include="Utility\Binary\FloatIntConverter.h" />
-    <ClInclude Include="Utility\Endian\EndianType.h" />
-    <ClInclude Include="Utility\Exception\FatalException.h" />
-    <ClInclude Include="Utility\Exception\AppException.h" />
-    <ClInclude Include="Utility\Exception\BackTraceGenerator.h" />
+    <ClInclude Include="Binary\FloatIntConverter.h" />
+    <ClInclude Include="Endian\EndianType.h" />
+    <ClInclude Include="Exception\FatalException.h" />
+    <ClInclude Include="Exception\AppException.h" />
+    <ClInclude Include="Exception\BackTraceGenerator.h" />
     <ClInclude Include="Common\CommonTypes.h" />
     <ClInclude Include="Config\PlatformConfig.h" />
-    <ClInclude Include="Utility\Exception\ErrorInfo.h" />
-    <ClInclude Include="Utility\Exception\SymbolInfoGenerator.h" />
-    <ClInclude Include="Utility\Exception\ExceptionTypes.h" />
-    <ClInclude Include="Utility\Exception\StackTrace.h" />
-    <ClInclude Include="Utility\Exception\StackTracer.h" />
-    <ClInclude Include="Utility\Exception\ExceptionBase.h" />
+    <ClInclude Include="Exception\ErrorInfo.h" />
+    <ClInclude Include="Exception\SymbolInfoGenerator.h" />
+    <ClInclude Include="Exception\ExceptionTypes.h" />
+    <ClInclude Include="Exception\StackTrace.h" />
+    <ClInclude Include="Exception\StackTracer.h" />
+    <ClInclude Include="Exception\ExceptionBase.h" />
     <ClInclude Include="Serialization\Interface\Serializer.h" />
-    <ClInclude Include="Utility\Endian\Endian.h" />
-    <ClInclude Include="Utility\Exception\SymbolInfo.h" />
-    <ClInclude Include="Utility\String\StringFormat.h" />
-    <ClInclude Include="Utility\TypeTraits\TypeTraits.h" />
+    <ClInclude Include="Endian\Endian.h" />
+    <ClInclude Include="Exception\SymbolInfo.h" />
+    <ClInclude Include="String\StringFormat.h" />
+    <ClInclude Include="TypeTraits\DataTypeTraits.h" />
+    <ClInclude Include="TypeTraits\TypeTraits.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Debug\DataDumper.cpp" />
-    <ClCompile Include="Debug\RandomDataGenerator.cpp" />
-    <ClCompile Include="Utility\Random\RandomGenerator.cpp" />
+    <ClCompile Include="Dump\DataDumper.cpp" />
+    <ClCompile Include="Random\RandomDataGenerator.cpp" />
+    <ClCompile Include="Random\RandomGenerator.cpp" />
     <ClCompile Include="Serialization\Binary\BinarySerialization.cpp" />
     <ClCompile Include="Serialization\Binary\BinarySerializer.h" />
     <ClCompile Include="Serialization\Interface\Archive.cpp" />
     <ClCompile Include="Serialization\Text\TextSerialization.cpp" />
-    <ClCompile Include="Utility\Exception\FatalException.cpp" />
-    <ClCompile Include="Utility\Exception\AppException.cpp" />
-    <ClCompile Include="Utility\Exception\BackTraceGenerator.cpp" />
-    <ClCompile Include="Utility\Exception\SymbolInfoGenerator.cpp" />
-    <ClCompile Include="Utility\Exception\StackTracer.cpp" />
-    <ClCompile Include="Utility\Exception\ExceptionBase.cpp" />
+    <ClCompile Include="Exception\FatalException.cpp" />
+    <ClCompile Include="Exception\AppException.cpp" />
+    <ClCompile Include="Exception\BackTraceGenerator.cpp" />
+    <ClCompile Include="Exception\SymbolInfoGenerator.cpp" />
+    <ClCompile Include="Exception\StackTracer.cpp" />
+    <ClCompile Include="Exception\ExceptionBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -148,7 +143,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.\Common;.\Config;.\Debug;.\DomainModel;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\Utility;.\Utility\Binary;.\Utility\Endian;.\Utility\Exception;.\Utility\Random;.\Utility\String;.\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Binary;.\Common;.\Config;.\Dump;.\Endian;.\Exception;.\Random;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\String;.\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -167,7 +162,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.\Common;.\Config;.\Debug;.\DomainModel;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\Utility;.\Utility\Binary;.\Utility\Endian;.\Utility\Exception;.\Utility\Random;.\Utility\String;.\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Binary;.\Common;.\Config;.\Dump;.\Endian;.\Exception;.\Random;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\String;.\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -186,7 +181,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.\Common;.\Config;.\Debug;.\DomainModel;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\Utility;.\Utility\Binary;.\Utility\Endian;.\Utility\Exception;.\Utility\Random;.\Utility\String;.\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Binary;.\Common;.\Config;.\Dump;.\Endian;.\Exception;.\Random;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\String;.\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -205,7 +200,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.\Common;.\Config;.\Debug;.\DomainModel;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\Utility;.\Utility\Binary;.\Utility\Endian;.\Utility\Exception;.\Utility\Random;.\Utility\String;.\Utility\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Binary;.\Common;.\Config;.\Dump;.\Endian;.\Exception;.\Random;.\Serialization;.\Serialization\Interface;.\Serialization\Binary;.\Serialization\Text;.\String;.\TypeTraits;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

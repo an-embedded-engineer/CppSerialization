@@ -3,25 +3,28 @@
 #include "BinarySerializer.h"
 #include "TextSerializer.h"
 
-namespace serialization
+namespace cpp_lib
 {
-    /* シリアライザファクトリクラス */
-    template <typename T>
-    class SerializerFactory
+    namespace serialization
     {
-    public:
-        /* バイナリ形式のシリアライザ生成 */
-        static Serializer<T>& CreateBinarySerializer()
+        /* シリアライザファクトリクラス */
+        template <typename T>
+        class SerializerFactory
         {
-            static BinarySerializer<T> serializer;
-            return serializer;
-        }
+        public:
+            /* バイナリ形式のシリアライザ生成 */
+            static Serializer<T>& CreateBinarySerializer()
+            {
+                static BinarySerializer<T> serializer;
+                return serializer;
+            }
 
-        /* テキスト形式のシリアライザ生成 */
-        static Serializer<T>& CreateTextSerializer()
-        {
-            static TextSerializer<T> serializer;
-            return serializer;
-        }
-    };
+            /* テキスト形式のシリアライザ生成 */
+            static Serializer<T>& CreateTextSerializer()
+            {
+                static TextSerializer<T> serializer;
+                return serializer;
+            }
+        };
+    }
 }
