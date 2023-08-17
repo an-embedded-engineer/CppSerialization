@@ -16,7 +16,7 @@ namespace util
         };
 
         /* •‚“®¬” <=> ®”•ÏŠ·ƒNƒ‰ƒX */
-        template <typename TF, typename TI>
+        template <typename TF, typename TI, util::type_traits::concept_t<std::is_floating_point<TF>::value&& std::is_integral<TI>::value> = nullptr>
         struct FloatIntConverter
         {
             /* ®” => •‚“®¬”•ÏŠ· */

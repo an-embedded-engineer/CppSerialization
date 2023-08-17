@@ -8,26 +8,30 @@ namespace util
     {
         /* コンストラクタ */
         ExceptionBase::ExceptionBase(const std::string& message)
-            : m_Message(message)
+            : m_FormattedMessage("")
+            , m_Message(message)
             , m_FilePath("")
             , m_FunctionName("")
             , m_LineNumber(0)
             , m_ErrorInfo("", "", 0)
             , m_IsErrorInfoExists(false)
         {
-            /* Nothing to do */
+            /* フォーマット済みメッセージ生成 */
+            this->m_FormattedMessage = this->GenerateFormattedMessage();
         }
 
         /* コンストラクタ */
         ExceptionBase::ExceptionBase(const std::string& message, const std::string& file, const std::string& func, const int line)
-            : m_Message(message)
+            : m_FormattedMessage("")
+            , m_Message(message)
             , m_FilePath(file)
             , m_FunctionName(func)
             , m_LineNumber(line)
             , m_ErrorInfo(file, func, line)
             , m_IsErrorInfoExists(true)
         {
-            /* Nothing to do */
+            /* フォーマット済みメッセージ生成 */
+            this->m_FormattedMessage = this->GenerateFormattedMessage();
         }
 
         /* デストラクタ */
@@ -63,23 +67,26 @@ namespace util
         /* エラー要因を取得 */
         char const* ExceptionBase::what() const noexcept
         {
+            return this->m_FormattedMessage.c_str();
+        }
+
+        std::string ExceptionBase::GenerateFormattedMessage()
+        {
             /* エラー情報が存在する場合 */
             if (this->m_IsErrorInfoExists == true)
             {
-                std::stringstream ss;
+                std::ostringstream ss;
 
                 /* エラーメッセージに、エラー発生箇所(関数名、ファイルパス、ファイル行数)を付加 */
                 ss << this->m_Message << " @ " << this->m_FunctionName << "[" << this->m_FilePath << ": L." << this->m_LineNumber << "]";
 
-                std::string message = ss.str();
-
-                return message.c_str();
+                return ss.str();
             }
             /* エラー情報が存在しない場合 */
             else
             {
                 /* エラーメッセージのみ出力 */
-                return this->m_Message.c_str();
+                return this->m_Message;
             }
         }
     }

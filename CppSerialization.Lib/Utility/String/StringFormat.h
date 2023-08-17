@@ -14,7 +14,7 @@ namespace util
     {
         namespace detail
         {
-#if __cpp_if_constexpr && 0
+#if __cpp_if_constexpr
             /* C++ 17版 */
             /* std::string型をconst char*に変換、列挙型(enum/enum class)を基底型に変換し、それ以外はそのまま出力 */
             template<typename T>

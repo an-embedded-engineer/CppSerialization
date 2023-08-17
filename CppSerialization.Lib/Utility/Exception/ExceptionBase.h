@@ -36,7 +36,13 @@ namespace util
             /* エラー要因を取得 */
             virtual char const* what() const noexcept override;
 
+        private:
+            std::string GenerateFormattedMessage();
+
         protected:
+            /* フォーマット済みエラーメッセージ */
+            std::string m_FormattedMessage;
+
             /* エラーメッセージ */
             std::string m_Message;
 
