@@ -7,7 +7,7 @@ namespace util
 {
     namespace exception
     {
-        /* Symbol Info Generatorクラス宣言 */
+        /* シンボル情報生成クラス */
         class SymbolInfoGenerator
         {
         public:

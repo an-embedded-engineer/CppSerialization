@@ -57,7 +57,6 @@
     <ClCompile Include="Debug\DataDumper.cpp" />
     <ClCompile Include="Debug\RandomDataGenerator.cpp" />
     <ClCompile Include="Utility\Random\RandomGenerator.cpp" />
-    <ClCompile Include="Utility\Binary\BinaryConverter.cpp" />
     <ClCompile Include="Serialization\Binary\BinarySerialization.cpp" />
     <ClCompile Include="Serialization\Binary\BinarySerializer.h" />
     <ClCompile Include="Serialization\Interface\Archive.cpp" />

@@ -4,14 +4,14 @@ namespace util
 {
     namespace random
     {
-        /* Get Singleton Instance */
+        /* シングルトンインスタンス取得 */
         RandomGenerator& RandomGenerator::GetInstance()
         {
             static RandomGenerator instance;
             return instance;
         }
 
-        /* Constructor */
+        /* コンストラクタ */
         RandomGenerator::RandomGenerator()
             : m_RandomDevice()
             , m_MT(m_RandomDevice())

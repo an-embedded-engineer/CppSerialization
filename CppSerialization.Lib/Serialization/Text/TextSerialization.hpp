@@ -4,7 +4,7 @@
 
 namespace serialization
 {
-    /* Explicit Instantiation */
+    /* 明示的インスタンス化 */
     /* dm::StrucMessage1 */
     template void TextSerialization::Serialize<dm::StrucMessage1>(const dm::StrucMessage1& in_data, Node& out_node, typename std::enable_if<std::is_class<dm::StrucMessage1>::value>::type*);
     template void TextSerialization::Deserialize<dm::StrucMessage1>(const Node& in_node, dm::StrucMessage1& out_data, typename std::enable_if<std::is_class<dm::StrucMessage1>::value>::type*);

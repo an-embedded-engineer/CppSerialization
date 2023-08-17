@@ -8,7 +8,7 @@ namespace util
 {
     namespace exception
     {
-        /* Exception Baseクラス宣言 */
+        /* 例外基底クラス */
         class ExceptionBase : public std::exception
         {
         public:

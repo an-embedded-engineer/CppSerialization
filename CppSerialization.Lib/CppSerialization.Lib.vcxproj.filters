@@ -46,7 +46,6 @@
     <ClCompile Include="Serialization\Binary\BinarySerializer.h" />
     <ClCompile Include="Serialization\Binary\BinarySerialization.cpp" />
     <ClCompile Include="Serialization\Text\TextSerialization.cpp" />
-    <ClCompile Include="Utility\Binary\BinaryConverter.cpp" />
     <ClCompile Include="Debug\DataDumper.cpp" />
     <ClCompile Include="Utility\Random\RandomGenerator.cpp" />
     <ClCompile Include="Debug\RandomDataGenerator.cpp" />

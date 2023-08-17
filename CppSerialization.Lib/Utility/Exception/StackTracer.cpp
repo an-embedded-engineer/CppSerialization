@@ -18,6 +18,8 @@
 #endif
 
 #include <string>
+#include <iomanip>
+#include <iostream>
 
 namespace util
 {
@@ -70,6 +72,7 @@ namespace util
 
             return stack_trace;
 #else
+
             /* 空のスタックトレース情報生成 */
             util::exception::StackTrace stack_trace;
             stack_trace.trace_size = 0;
@@ -78,6 +81,35 @@ namespace util
 
             return stack_trace;
 #endif
+        }
+
+        /* スタックトレースを文字列ストリームにダンプ */
+        void StackTracer::DumpStackTrace(std::stringstream& ss)
+        {
+            /* スタックトレース情報を取得 */
+            util::exception::StackTrace stack_trace = util::exception::StackTracer::GetStackTrace();
+
+            /* スタックトレースをダンプ */
+            ss << "[Stack Traces] : " << std::endl;
+            for (size_t i = 0; i < stack_trace.traces.size(); i++)
+            {
+                if (i != 0)
+                {
+                    ss << std::endl;
+                }
+
+                ss << "  ";
+                ss << std::setw(16) << std::setfill('0') << std::hex << (uint64_t)stack_trace.traces[i];
+                ss << " | ";
+                if (i < stack_trace.symbols.size())
+                {
+                    ss << stack_trace.symbols[i];
+                }
+                else
+                {
+                    ss << "<Unknown Symbol>";
+                }
+            }
         }
     }
 }

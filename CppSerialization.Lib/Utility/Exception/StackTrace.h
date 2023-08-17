@@ -20,6 +20,15 @@ namespace util
 
             /* トレースシンボルリスト */
             std::vector<std::string> symbols;
+
+            /* コンストラクタ */
+            StackTrace()
+                : trace_size(0)
+                , traces()
+                , symbols()
+            {
+                /* Nothing to do */
+            }
         };
     }
 }

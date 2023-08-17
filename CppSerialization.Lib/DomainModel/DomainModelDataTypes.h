@@ -37,6 +37,23 @@ namespace dm
 
     using MapMessage = std::map<int32_t, float64_t>;
 
+    enum class EnumMessage1
+    {
+        VALUE1,
+        VALUE2,
+        VALUE3,
+        VALUE4,
+    };
+
+    enum EnumMessage2
+    {
+        ENUM_MSG2_VALUE1,
+        ENUM_MSG2_VALUE2,
+        ENUM_MSG2_VALUE3,
+        ENUM_MSG2_VALUE4,
+        ENUM_MSG2_VALUE5,
+    };
+
     struct StrucMessage1
     {
         bool_t bool_value;
@@ -61,22 +78,5 @@ namespace dm
     {
         string_t string_value;
         std::map<EnumType1, string_t> enum_str_map;
-    };
-
-    enum class EnumMessage1
-    {
-        VALUE1,
-        VALUE2,
-        VALUE3,
-        VALUE4,
-    };
-
-    enum EnumMessage2
-    {
-        ENUM_MSG2_VALUE1,
-        ENUM_MSG2_VALUE2,
-        ENUM_MSG2_VALUE3,
-        ENUM_MSG2_VALUE4,
-        ENUM_MSG2_VALUE5,
     };
 }

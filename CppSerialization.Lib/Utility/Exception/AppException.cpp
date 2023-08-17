@@ -3,8 +3,6 @@
 #include "StringFormat.h"
 
 #include <sstream>
-#include <iomanip>
-#include <iostream>
 
 namespace util
 {
@@ -51,9 +49,6 @@ namespace util
         /* エラーメッセージ生成 */
         const std::string AppException::GenerateErrorMessage()
         {
-            /* スタックトレース情報を取得 */
-            util::exception::StackTrace stack_trace = util::exception::StackTracer::GetStackTrace();
-
             std::stringstream ss;
 
             /* エラー情報がある場合は、エラー情報付きメッセージを生成 */
@@ -68,26 +63,7 @@ namespace util
             ss << std::endl;
 
             /* スタックトレースをダンプ */
-            ss << "[Stack Traces] : " << std::endl;
-            for (size_t i = 0; i < stack_trace.traces.size(); i++)
-            {
-                if (i != 0)
-                {
-                    ss << std::endl;
-                }
-
-                ss << "  ";
-                ss << std::setw(16) << std::setfill('0') << std::hex << (uint64_t)stack_trace.traces[i];
-                ss << " | ";
-                if (i < stack_trace.symbols.size())
-                {
-                    ss << stack_trace.symbols[i];
-                }
-                else
-                {
-                    ss << "<Unknown Symbol>";
-                }
-            }
+            util::exception::StackTracer::DumpStackTrace(ss);
             ss << std::endl;
 
             return ss.str();

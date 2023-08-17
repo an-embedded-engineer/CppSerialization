@@ -4,7 +4,7 @@
 #include "RandomGenerator.h"
 #include <sstream>
 
-#define MINUS_VALUE_ENABLED (0) /* 負値有効化 */
+#define MINUS_VALUE_ENABLED (0) /* 乱数データ生成時の負値有効化 */
 
 namespace debug
 {
@@ -57,12 +57,14 @@ namespace debug
     template<typename T, util::type_traits::concept_t<std::is_enum<T>::value>>
     void RandomDataGenerator::Generate(T& data)
     {
+        /* EnumDataTypeTraitsからenumの最大/最小値を取得し基底型にキャスト */
         util::type_traits::underlying_type_t<T> min_value = util::type_traits::underlying_cast<T>(dm::EnumDataTypeTraits<T>::GetMinValue());
-
         util::type_traits::underlying_type_t<T> max_value = util::type_traits::underlying_cast<T>(dm::EnumDataTypeTraits<T>::GetMaxValue());
 
+        /* 基底型で乱数生成 */
         util::type_traits::underlying_type_t<T> underlying_data = GET_RANDOM_INT(min_value, max_value);
 
+        /* 元のenum/enum class型にキャストしてセット */
         data = static_cast<T>(underlying_data);
     }
 
@@ -70,8 +72,10 @@ namespace debug
     template<typename T, util::type_traits::concept_t<std::is_class<T>::value>>
     void RandomDataGenerator::Generate(T& data)
     {
+        /* メンバのタプル取得 */
         auto tuple = dm::DataTypeTraits<T>::GetMembersAsTuple(data);
 
+        /* メンバのタプルから乱数データ生成 */
         RandomDataGenerator::GenerateTuple(tuple);
     }
 
@@ -144,15 +148,28 @@ namespace debug
     /* 文字列型(string)乱数データ生成 */
     void RandomDataGenerator::Generate(std::string& data)
     {
-        int num = GET_RANDOM_INT(1, 10);
+        /* 乱数データとして使用する文字リスト */
+        const std::string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        /* 乱数データとして使用する文字リストの長さを取得 */
+        const size_t chars_length = chars.length();
+
+        /* 乱数データとして生成する文字列の長さをランダムに算出 */
+        int data_length = GET_RANDOM_INT(MIN_CONTAINER_SIZE, MAX_CONTAINER_SIZE);
 
         std::stringstream ss;
 
-        for (int i = 0; i < num; i++)
+        /* 文字列の長さ分繰り返す */
+        for (int i = 0; i < data_length; i++)
         {
-            ss << i;
+            /* 乱数データとして使用する文字リストのインデックスをランダムに選出 */
+            int index = GET_RANDOM_INT(0, static_cast<int>(chars_length - 1));
+
+            /* 乱数データとして使用する文字リストの指定インデックスの文字を追加 */
+            ss << chars[index];
         }
 
+        /* 文字列に変換 */
         data = ss.str();
     }
 }

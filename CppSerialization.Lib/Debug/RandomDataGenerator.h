@@ -3,11 +3,13 @@
 #include "TypeTraits.h"
 #include "RandomGenerator.h"
 
-#define MIN_CONTAINER_SIZE  (1)     /* Min Container Size */
-#define MAX_CONTAINER_SIZE  (30)    /* Max Container Size */
+/* 乱数データ生成時のコンテナ最大/最小サイズ */
+#define MIN_CONTAINER_SIZE  (1)     /* 最小コンテナサイズ */
+#define MAX_CONTAINER_SIZE  (30)    /* 最大コンテナサイズ */
 
 namespace debug
 {
+    /* 乱数データ生成クラス */
     class RandomDataGenerator
     {
     public:

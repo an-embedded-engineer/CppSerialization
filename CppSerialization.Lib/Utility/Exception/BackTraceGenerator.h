@@ -8,7 +8,7 @@ namespace util
 {
     namespace exception
     {
-        /* Back Trace Generatorクラス宣言 */
+        /* バックトレース生成クラス */
         class BackTraceGenerator
         {
         public:

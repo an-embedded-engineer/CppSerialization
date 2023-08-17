@@ -7,7 +7,7 @@ namespace util
 {
     namespace exception
     {
-        /* Application Exceptionクラス宣言 */
+        /* アプリケーション例外クラス */
         class AppException : public util::exception::ExceptionBase
         {
         public:
@@ -34,6 +34,6 @@ namespace util
     }
 }
 
-/* Application Exceptionのthrow */
+/* アプリケーション例外送出マクロ関数 */
 #define THROW_APP_EXCEPTION(message) \
     throw util::exception::AppException(message, __FILE__, __FUNCTION__, __LINE__)

@@ -10,10 +10,13 @@
 #if PLATFORM_TYPE_OVERRIDE_ENABLED == 0
 #include <execinfo.h>
 #else
+/* バックトレース取得関数スタブ */
 inline int backtrace(void** buffer, int size)
 {
     return 0;
 }
+
+/* バックトレースシンボル情報取得関数スタブ */
 inline char** backtrace_symbols(void* const* buffer, int size)
 {
     return nullptr;

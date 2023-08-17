@@ -5,6 +5,11 @@
 
 #include <iostream>
 
+#define SERIALIZE_MODE_BINARY   (0)
+#define SERIALIZE_MODE_TEXT     (1)
+
+#define SERIALIZE_MODE          (SERIALIZE_MODE_BINARY)
+
 template <typename T>
 void SerializeTest(const std::string& type_name)
 {
@@ -17,10 +22,14 @@ void SerializeTest(const std::string& type_name)
     debug::RandomDataGenerator::Generate(in_data);
 
     ss << "-----Before Dump----" << std::endl;
-    debug::DataDumper::Dump(in_data, ss);
+    ss << debug::DataDumper::ToString(type_name, in_data);
     ss << "--------------------" << std::endl;
 
+#if SERIALIZE_MODE == SERIALIZE_MODE_TEXT
+    serialization::Serializer<T>& serializer = serialization::SerializerFactory<T>::CreateTextSerializer();
+#else
     serialization::Serializer<T>& serializer = serialization::SerializerFactory<T>::CreateBinarySerializer();
+#endif
 
     serialization::Archive archive;
 
@@ -28,14 +37,20 @@ void SerializeTest(const std::string& type_name)
 
     ss << std::endl;
     ss << "Serialized Size : " << archive.GetSize() << std::endl;
+#if SERIALIZE_MODE == SERIALIZE_MODE_TEXT
+    ss << "------XML Dump------" << std::endl;
+    ss << archive.GetDataPtr();
+    ss << "--------------------" << std::endl;
+#endif
+
     ss << std::endl;
 
     T out_data{};
 
     serializer.Deserialize(archive, out_data);
 
-    ss << "-----After Dump----" << std::endl;;
-    debug::DataDumper::Dump(out_data, ss);
+    ss << "-----After Dump----" << std::endl;
+    ss << debug::DataDumper::ToString(type_name, out_data);
     ss << "--------------------" << std::endl;;
 
     std::cout << ss.str() << std::endl;
@@ -60,11 +75,11 @@ int main()
     SerializeTest<dm::ArrayMessage>("ArrayMessage");
     SerializeTest<dm::VectorMessage>("VectorMessage");
     SerializeTest<dm::MapMessage>("MapMessage");
+    SerializeTest<dm::EnumMessage1>("EnumMessage1");
+    SerializeTest<dm::EnumMessage2>("EnumMessage2");
     SerializeTest<dm::StrucMessage1>("StrucMessage1");
     SerializeTest<dm::StrucMessage2>("StrucMessage2");
     SerializeTest<dm::StrucMessage3>("StrucMessage3");
-    SerializeTest<dm::EnumMessage1>("EnumMessage1");
-    SerializeTest<dm::EnumMessage2>("EnumMessage2");
 
     return 0;
 }

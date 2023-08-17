@@ -17,17 +17,22 @@ namespace util
 {
     namespace random
     {
+        /* 乱数生成クラス */
         class RandomGenerator
         {
         public:
+            /* シングルトンインスタンス取得 */
             static RandomGenerator& GetInstance();
 
         private:
+            /* コンストラクタ */
             RandomGenerator();
 
+            /* デストラクタ */
             ~RandomGenerator() = default;
 
         public:
+            /* コピー&ムーブセマンティクス無効化 */
             RandomGenerator(const RandomGenerator&) = delete;
             RandomGenerator(RandomGenerator&&) = delete;
             RandomGenerator& operator=(const RandomGenerator&) = delete;
@@ -140,12 +145,15 @@ namespace util
             }
 
         private:
-            std::random_device m_RandomDevice; /* Random Device */
-            std::mt19937_64 m_MT; /* MT19937 */
+            /* ランダムデバイス */
+            std::random_device m_RandomDevice;
+
+            /* 64bit MT19937(メルセンヌ・ツイスターエンジン) */
+            std::mt19937_64 m_MT;
         };
     }
 
-    /* Generate Random Value Macro Function */
+/* 乱数生成マクロ関数 */
 #if RANDOM_GENERATE_MODE == RANDOM_GENERATE_MODE_NORMAL
 #define GET_RANDOM_INT(min, max)                util::random::RandomGenerator::GetInstance().GenerateInt(min, max, false)
 #define GET_RANDOM_FLOAT(min, max)              util::random::RandomGenerator::GetInstance().GenerateFloat(min, max, false)

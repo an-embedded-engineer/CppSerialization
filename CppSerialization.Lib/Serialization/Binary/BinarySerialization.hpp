@@ -4,7 +4,7 @@
 
 namespace serialization
 {
-    /* Explicit Instantiation */
+    /* 明示的インスタンス化 */
     /* dm::StrucMessage1 */
     template void BinarySerialization::Calculate<dm::StrucMessage1>(const dm::StrucMessage1& in_data, size_t& out_size, typename std::enable_if<std::is_class<dm::StrucMessage1>::value>::type*);
     template void BinarySerialization::Serialize<dm::StrucMessage1>(const dm::StrucMessage1& in_data, size_t& offset, serialization::Archive& out_archive, typename std::enable_if<std::is_class<dm::StrucMessage1>::value>::type*);

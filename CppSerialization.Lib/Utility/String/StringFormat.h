@@ -1,11 +1,12 @@
 #pragma once
+#include "TypeTraits.h"
+
 #include <string>
 #include <cstdio>
 #include <stdexcept>
 #include <vector>
 #include <iostream>
 #include <memory>
-#include <type_traits>
 
 namespace util
 {
@@ -13,22 +14,7 @@ namespace util
     {
         namespace detail
         {
-            /* Œ^ƒRƒ“ƒZƒvƒg”»’è */
-            template<bool con>
-            using concept_t = typename std::enable_if<con, std::nullptr_t>::type;
-
-            /* —ñ‹“Œ^(enum/enum class)‚ÌŠî’êŒ^‚ğæ“¾ */
-            template<typename T>
-            using underlying_type_t = typename std::underlying_type<T>::type;
-
-            /* —ñ‹“Œ^(enum/enum class)‚ğŠî’êŒ^‚ÉƒLƒƒƒXƒg */
-            template<typename T, concept_t<std::is_enum<T>::value> = nullptr>
-            constexpr underlying_type_t<T> underlying_cast(T e)
-            {
-                return static_cast<underlying_type_t<T>>(e);
-            }
-
-#if __cpp_if_constexpr
+#if __cpp_if_constexpr && 0
             /* C++ 17”Å */
             /* std::stringŒ^‚ğconst char*‚É•ÏŠ·A—ñ‹“Œ^(enum/enum class)‚ğŠî’êŒ^‚É•ÏŠ·‚µA‚»‚êˆÈŠO‚Í‚»‚Ì‚Ü‚Üo—Í */
             template<typename T>
@@ -42,7 +28,7 @@ namespace util
                 /* —ñ‹“Œ^(enum/enum class)‚ğŠî’êŒ^‚É•ÏŠ· */
                 else if constexpr (std::is_enum_v<T>)
                 {
-                    return std::forward<underlying_type_t<T>>(underlying_cast(value));
+                    return std::forward<util::type_traits::underlying_type_t<T>>(util::type_traits::underlying_cast(value));
                 }
                 /* std::stringŒ^A—ñ‹“Œ^(enum/enum class)ˆÈŠO‚ÍA‚»‚Ì‚Ü‚Üo—Í */
                 else
@@ -53,21 +39,21 @@ namespace util
 #else
             /* C++ 11/14”Å */
             /* std::stringŒ^‚ğconst char*‚É•ÏŠ· */
-            template<typename T, concept_t<std::is_same<std::remove_cv_t<std::remove_reference_t<T>>, std::string>::value> = nullptr>
+            template<typename T, util::type_traits::concept_t<std::is_same<std::remove_cv_t<std::remove_reference_t<T>>, std::string>::value> = nullptr>
             auto Convert(T&& value)
             {
                 return std::forward<T>(value).c_str();
             }
 
             /* —ñ‹“Œ^(enum/enum class)‚ğŠî’êŒ^‚É•ÏŠ· */
-            template<typename T, concept_t<std::is_enum<T>::value> = nullptr>
+            template<typename T, util::type_traits::concept_t<std::is_enum<T>::value> = nullptr>
             auto Convert(T&& value)
             {
-                return std::forward<underlying_type_t<T>>(underlying_cast(value));
+                return std::forward<util::type_traits::underlying_type_t<T>>(util::type_traits::underlying_cast(value));
             }
 
             /* std::stringŒ^A—ñ‹“Œ^(enum/enum class)ˆÈŠO‚ÍA‚»‚Ì‚Ü‚Üo—Í */
-            template<typename T, concept_t<!std::is_same<std::remove_cv_t<std::remove_reference_t<T>>, std::string>::value && !std::is_enum<T>::value> = nullptr>
+            template<typename T, util::type_traits::concept_t<!std::is_same<std::remove_cv_t<std::remove_reference_t<T>>, std::string>::value && !std::is_enum<T>::value> = nullptr>
             auto Convert(T&& value)
             {
                 return std::forward<T>(value);

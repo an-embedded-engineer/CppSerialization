@@ -7,7 +7,7 @@ namespace util
 {
     namespace exception
     {
-        /* Fatal Exceptionクラス宣言 */
+        /* 致命的例外クラス */
         class FatalException : public util::exception::ExceptionBase
         {
         public:
@@ -34,6 +34,6 @@ namespace util
     }
 }
 
-/* Fatal Exceptionのthrow */
+/* 致命的例外送出マクロ関数 */
 #define THROW_FATAL_EXCEPTION(message) \
     throw util::exception::FatalException(message, __FILE__, __FUNCTION__, __LINE__)

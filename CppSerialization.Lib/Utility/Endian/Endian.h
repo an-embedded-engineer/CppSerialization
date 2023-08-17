@@ -24,7 +24,7 @@ namespace util
             return !IsLittleEndian();
         }
 
-        /* 実行環境エンディアン判定 */
+        /* 現在の実行環境のエンディアン判定 */
         inline util::endian::EndianType GetEnvironmentEndian()
         {
             /* リトルエンディアン判定 */
@@ -73,6 +73,7 @@ namespace util
             {
                 inline T operator()(T value)
                 {
+                    /* バイト列をスワップ */
                     return ((((value) & 0xFF000000) >> 24)
                             | (((value) & 0x00FF0000) >> 8)
                             | (((value) & 0x0000FF00) << 8)
@@ -86,6 +87,7 @@ namespace util
             {
                 inline T operator()(T value)
                 {
+                    /* バイト列をスワップ */
                     return ((((value) & 0xFF00000000000000ull) >> 56)
                             | (((value) & 0x00FF000000000000ull) >> 40)
                             | (((value) & 0x0000FF0000000000ull) >> 24)
@@ -105,6 +107,7 @@ namespace util
                 {
                     /* uint32型に変換してバイト列をスワップ */
                     uint32_t tmp_value = SwapBytes<uint32_t, sizeof(uint32_t)>()(util::binary::FloatIntConverter<float, uint32_t>::ConvertToInt(value));
+
                     /* スワップしたバイト列をfloat型に再度変換 */
                     return util::binary::FloatIntConverter<float, uint32_t>::ConvertToFloat(tmp_value);
                 }
@@ -118,6 +121,7 @@ namespace util
                 {
                     /* uint64型に変換してバイト列をスワップ */
                     uint64_t tmp_value = SwapBytes<uint64_t, sizeof(uint64_t)>()(util::binary::FloatIntConverter<double, uint64_t>::ConvertToInt(value));
+
                     /* スワップしたバイト列をdouble型に再度変換 */
                     return util::binary::FloatIntConverter<double, uint64_t>::ConvertToFloat(tmp_value);
                 }
@@ -191,6 +195,40 @@ namespace util
             {
                 /* エンディアン変換(ビッグ -> リトル) */
                 return detail::Swap<util::endian::EndianType::Big, util::endian::EndianType::Little, T>()(value);
+            }
+        }
+
+        /* エンディアン変換 */
+        template<class T, util::endian::EndianType To>
+        inline T ConvertEndian(T value)
+        {
+            /* 入力データサイズチェック */
+            static_assert((sizeof(T) == 1) || (sizeof(T) == 2) || (sizeof(T) == 4) || (sizeof(T) == 8), "(sizeof(T) == 1) || (sizeof(T) == 2) || (sizeof(T) == 4) || (sizeof(T) == 8)");
+
+            /* 入力データ型チェック */
+            static_assert((std::is_arithmetic<T>::value), "(std::is_arithmetic<T>::value)");
+
+            /* 現在の環境のエンディアンと指定されたエンディアンが異なる */
+            if (GetEnvironmentEndian() != To)
+            {
+                /* 現在の環境のエンディアンがリトルエンディアン */
+                if (GetEnvironmentEndian() == util::endian::EndianType::Little)
+                {
+                    /* エンディアン変換(リトル -> ビッグ) */
+                    return detail::Swap<util::endian::EndianType::Little, util::endian::EndianType::Big, T>()(value);
+                }
+                /* 現在の環境のエンディアンがビッグエンディアン */
+                else
+                {
+                    /* エンディアン変換(ビッグ -> リトル) */
+                    return detail::Swap<util::endian::EndianType::Big, util::endian::EndianType::Little, T>()(value);
+                }
+            }
+            /* 現在の環境のエンディアンと指定されたエンディアンが同じ */
+            else
+            {
+                /* エンディアン変換不要 */
+                return value;
             }
         }
     }
