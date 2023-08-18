@@ -39,8 +39,6 @@
     <ClCompile Include="Exception\FatalException.cpp" />
     <ClCompile Include="Serialization\Interface\Archive.cpp" />
     <ClCompile Include="Serialization\Binary\BinarySerializer.h" />
-    <ClCompile Include="Serialization\Binary\BinarySerialization.cpp" />
-    <ClCompile Include="Serialization\Text\TextSerialization.cpp" />
     <ClCompile Include="Dump\DataDumper.cpp" />
     <ClCompile Include="Random\RandomGenerator.cpp" />
     <ClCompile Include="Random\RandomDataGenerator.cpp" />

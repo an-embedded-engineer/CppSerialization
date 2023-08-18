@@ -1,8 +1,9 @@
 #pragma once
 #include "CommonTypes.h"
-#include "EndianType.h"
 #include "TypeTraits.h"
 #include "DataTypeTraits.h"
+#include "EndianType.h"
+#include "Endian.h"
 #include "Archive.h"
 #include "BinaryConverter.h"
 
@@ -15,11 +16,20 @@ namespace cpp_lib
         {
         public:
             /* シングルトンインスタンス取得 */
-            static BinarySerialization& GetInstance();
+            static BinarySerialization& GetInstance()
+            {
+                static BinarySerialization instance;
+                return instance;
+            }
 
         private:
             /* コンストラクタ */
-            BinarySerialization();
+            BinarySerialization()
+                : m_CurrentEndian(cpp_lib::endian::GetEnvironmentEndian())
+                , m_TargetEndian(cpp_lib::endian::EndianType::Network)
+            {
+                /* Nothing to do */
+            }
 
             /* デストラクタ */
             ~BinarySerialization() = default;
@@ -71,16 +81,16 @@ namespace cpp_lib
             }
 
         private:
-            /* bool以外の整数型データサイズ算出 */
-            template<typename T, cpp_lib::type_traits::concept_t<cpp_lib::type_traits::is_nonbool_integral<T>::value> = nullptr>
+            /* 算術型データサイズ算出 */
+            template<typename T, cpp_lib::type_traits::concept_t<std::is_arithmetic<T>::value> = nullptr>
             void Calculate(const T& in_data, size_t& out_size)
             {
                 /* 入力データの型のサイズを加算 */
                 out_size += sizeof(in_data);
             }
 
-            /* bool以外の整数型シリアライズ */
-            template<typename T, cpp_lib::type_traits::concept_t<cpp_lib::type_traits::is_nonbool_integral<T>::value> = nullptr>
+            /* 算術型シリアライズ */
+            template<typename T, cpp_lib::type_traits::concept_t<std::is_arithmetic<T>::value> = nullptr>
             void Serialize(const T& in_data, size_t& offset, Archive& out_archive)
             {
                 /* バイト配列 */
@@ -93,8 +103,8 @@ namespace cpp_lib
                 out_archive.Write(in_bytes, offset);
             }
 
-            /* bool以外の整数型デシリアライズ */
-            template<typename T, cpp_lib::type_traits::concept_t<cpp_lib::type_traits::is_nonbool_integral<T>::value> = nullptr>
+            /* 算術型デシリアライズ */
+            template<typename T, cpp_lib::type_traits::concept_t<std::is_arithmetic<T>::value> = nullptr>
             void Deserialize(const Archive& in_archive, size_t& offset, T& out_data)
             {
                 /* バイト配列 */
@@ -106,44 +116,6 @@ namespace cpp_lib
                 /* バイト配列を出力データに変換(エンディアンにより必要に応じてスワップ) */
                 cpp_lib::binary::BinaryConverter::Convert(this->m_CurrentEndian, this->m_TargetEndian, out_bytes, out_data);
             }
-
-
-            /* 浮動小数型データサイズ算出 */
-            template<typename T, cpp_lib::type_traits::concept_t<std::is_floating_point<T>::value> = nullptr>
-            void Calculate(const T& in_data, size_t& out_size)
-            {
-                /* 入力データの型のサイズを加算 */
-                out_size += sizeof(in_data);
-            }
-
-            /* 浮動小数型シリアライズ */
-            template<typename T, cpp_lib::type_traits::concept_t<std::is_floating_point<T>::value> = nullptr>
-            void Serialize(const T& in_data, size_t& offset, Archive& out_archive)
-            {
-                /* バイト配列 */
-                std::array<byte_t, sizeof(T)> in_bytes{};
-
-                /* 入力データをバイト配列に変換(エンディアンにより必要に応じてスワップ) */
-                cpp_lib::binary::BinaryConverter::Convert(this->m_CurrentEndian, this->m_TargetEndian, in_data, in_bytes);
-
-                /* 指定オフセット位置からバイト配列をアーカイブに書き込み */
-                out_archive.Write(in_bytes, offset);
-            }
-
-            /* 浮動小数型デシリアライズ */
-            template<typename T, cpp_lib::type_traits::concept_t<std::is_floating_point<T>::value> = nullptr>
-            void Deserialize(const Archive& in_archive, size_t& offset, T& out_data)
-            {
-                /* バイト配列 */
-                std::array<byte_t, sizeof(T)> out_bytes{};
-
-                /* 入力データをバイト配列に変換(エンディアンにより必要に応じてスワップ) */
-                in_archive.Read(out_bytes, offset);
-
-                /* 指定オフセット位置からバイト配列をアーカイブに書き込み */
-                cpp_lib::binary::BinaryConverter::Convert(this->m_CurrentEndian, this->m_TargetEndian, out_bytes, out_data);
-            }
-
 
             /* 列挙型(enum/enum class)データサイズ算出 */
             template<typename T, cpp_lib::type_traits::concept_t<std::is_enum<T>::value> = nullptr>
@@ -490,25 +462,45 @@ namespace cpp_lib
                 this->DeserializeTuple(in_archive, offset, tuple);
             }
 
-        private:
-            /* 論理型(bool)データサイズ算出 */
-            void Calculate(const bool_t& in_data, size_t& out_size);
-
-            /* 論理型(bool)シリアライズ */
-            void Serialize(const bool_t& in_data, size_t& offset, Archive& out_archive);
-
-            /* 論理型(bool)デシリアライズ */
-            void Deserialize(const Archive& in_archive, size_t& offset, bool_t& out_data);
-
 
             /* 文字列型データサイズ算出 */
-            void Calculate(const string_t& in_data, size_t& out_size);
+            inline void Calculate(const string_t& in_data, size_t& out_size)
+            {
+                /* 要素数の型(size_t型)のデータサイズを加算 */
+                out_size += sizeof(size_t);
+
+                /* 要素数算出(文字列の長さ + null文字のサイズ) */
+                size_t data_size = (in_data.size() + sizeof(char));
+
+                /* 要素数を加算 */
+                out_size += data_size;
+            }
 
             /* 文字列型シリアライズ */
-            void Serialize(const string_t& in_data, size_t& offset, Archive& out_archive);
+            inline void Serialize(const string_t& in_data, size_t& offset, Archive& out_archive)
+            {
+                /* 要素数算出(文字列の長さ + null文字のサイズ) */
+                size_t data_size = (in_data.size() + sizeof(char));
+
+                /* 要素数をシリアライズ */
+                this->Serialize(data_size, offset, out_archive);
+
+                /* 指定オフセット位置から文字列データ書き込み */
+                out_archive.Write(in_data, offset);
+            }
 
             /* 文字列型デシリアライズ */
-            void Deserialize(const Archive& in_archive, size_t& offset, string_t& out_data);
+            inline void Deserialize(const Archive& in_archive, size_t& offset, string_t& out_data)
+            {
+                /* 要素数 */
+                size_t data_size = 0;
+
+                /* 要素数をデシリアライズ */
+                this->Deserialize(in_archive, offset, data_size);
+
+                /* 指定オフセット位置から指定サイズ分文字列データ読み込み */
+                in_archive.Read(out_data, offset, data_size);
+            }
 
         private:
             /* 現在の環境のエンディアン */

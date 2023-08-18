@@ -121,7 +121,7 @@ namespace cpp_lib
             /* 範囲外チェック(オフセットから文字列の終端 + null) */
             if ((offset + text_len + 1) > this->m_Size)
             {
-                THROW_FATAL_EXCEPTION(STRING_FORMAT("Offset is out of range : offset=%d text_len=%d size=%d", offset, text_len, this->m_Size));
+                THROW_FATAL_EXCEPTION(STRING_FORMAT("Offset + Length is out of range : offset=%d text_len=%d size=%d", offset, text_len, this->m_Size));
             }
 
             /* 指定オフセット位置から文字列をコピー */
@@ -168,7 +168,7 @@ namespace cpp_lib
             /* 範囲外チェック */
             if (offset + length > this->m_Size)
             {
-                THROW_FATAL_EXCEPTION(STRING_FORMAT("Offset is out of range : offset=%d length=%d size=%d", offset, length, this->m_Size));
+                THROW_FATAL_EXCEPTION(STRING_FORMAT("Offset + Length is out of range : offset=%d length=%d size=%d", offset, length, this->m_Size));
             }
 
             /* 末尾がnull文字 */

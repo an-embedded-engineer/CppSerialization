@@ -2,7 +2,7 @@
 #include "RandomGenerator.h"
 #include <sstream>
 
-#define MINUS_VALUE_ENABLED (0) /* 乱数データ生成時の負値有効化 */
+#define MINUS_VALUE_ENABLED (1) /* 乱数データ生成時の負値有効化 */
 
 namespace cpp_lib
 {
