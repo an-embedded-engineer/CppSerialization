@@ -17,7 +17,7 @@
 #define TEXT_SERIALIZE_MODE_XML     (0)
 #define TEXT_SERIALIZE_MODE_JSON    (1)
 
-#define TEXT_SERIALIZE_MODE         (TEXT_SERIALIZE_MODE_XML)
+#define TEXT_SERIALIZE_MODE         (TEXT_SERIALIZE_MODE_JSON)
 
 namespace cpp_lib
 {
@@ -300,6 +300,7 @@ namespace cpp_lib
                 }
             }
 
+            /* std::map型デシリアライズ */
             template <typename TKey, typename TValue>
             void Deserialize(const Node& in_node, const string_t& name, std::map<TKey, TValue>& out_data)
             {
@@ -444,16 +445,17 @@ namespace cpp_lib
                 /* 文字列ストリーム */
                 std::stringstream ss;
 
+#if TEXT_SERIALIZE_MODE == TEXT_SERIALIZE_MODE_XML
                 /* インデントサイズ */
                 const int indent = 2;
 
-#if TEXT_SERIALIZE_MODE == TEXT_SERIALIZE_MODE_XML
                 /* XML書き込み設定(インデント文字、インデントサイズ、エンコーディング) */
                 auto setting = boost::property_tree::xml_parser::xml_writer_make_settings<string_t>(' ', indent, boost::property_tree::xml_parser::widen<string_t>("utf-8"));
 
                 /* XMLとして文字列ストリームに書き込み */
                 boost::property_tree::write_xml(ss, in_root_node, setting);
 #elif TEXT_SERIALIZE_MODE == TEXT_SERIALIZE_MODE_JSON
+
                 /* JSONとして文字列ストリームに書き込み */
                 boost::property_tree::write_json(ss, in_root_node);
 #else
