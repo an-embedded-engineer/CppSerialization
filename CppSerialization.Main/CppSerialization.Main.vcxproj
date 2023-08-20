@@ -147,8 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="UserTypes\UserTypeOperations.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UserTypes\UserTypeOperations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CppSerialization.Lib\CppSerialization.Lib.vcxproj">
