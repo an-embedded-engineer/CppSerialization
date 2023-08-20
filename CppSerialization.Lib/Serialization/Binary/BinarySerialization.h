@@ -152,8 +152,8 @@ namespace cpp_lib
             template <typename T, size_t N>
             void Calculate(const std::array<T, N>& in_data, size_t& out_size)
             {
-                /* 要素数の型(size_t型)のデータサイズを加算 */
-                out_size += sizeof(size_t);
+                /* 要素数の型(uint64_t型)のデータサイズを加算 */
+                out_size += sizeof(uint64_t);
 
                 /* 全要素を走査 */
                 for (const auto& item : in_data)
@@ -168,7 +168,7 @@ namespace cpp_lib
             void Serialize(const std::array<T, N>& in_data, size_t& offset, Archive& out_archive)
             {
                 /* 要素数をシリアライズ */
-                this->Serialize(in_data.size(), offset, out_archive);
+                this->Serialize(static_cast<uint64_t>(in_data.size()), offset, out_archive);
 
                 /* 全要素を走査 */
                 for (const auto& item : in_data)
@@ -183,13 +183,13 @@ namespace cpp_lib
             void Deserialize(const Archive& in_archive, size_t& offset, std::array<T, N>& out_data)
             {
                 /* 要素数 */
-                size_t size = 0;
+                uint64_t size = 0;
 
                 /* 要素数をデシリアライズ */
                 this->Deserialize(in_archive, offset, size);
 
                 /* 要素数分ループ */
-                for (size_t i = 0; i < size; i++)
+                for (uint64_t i = 0; i < size; i++)
                 {
                     /* 要素 */
                     T item{};
@@ -207,8 +207,8 @@ namespace cpp_lib
             template <typename T>
             void Calculate(const std::vector<T>& in_data, size_t& out_size)
             {
-                /* 要素数の型(size_t型)のデータサイズを加算 */
-                out_size += sizeof(size_t);
+                /* 要素数の型(uint64_t型)のデータサイズを加算 */
+                out_size += sizeof(uint64_t);
 
                 /* 全要素を走査 */
                 for (const auto& item : in_data)
@@ -223,7 +223,7 @@ namespace cpp_lib
             void Serialize(const std::vector<T>& in_data, size_t& offset, Archive& out_archive)
             {
                 /* 要素数をシリアライズ */
-                this->Serialize(in_data.size(), offset, out_archive);
+                this->Serialize(static_cast<uint64_t>(in_data.size()), offset, out_archive);
 
                 /* 全要素を走査 */
                 for (const auto& item : in_data)
@@ -238,7 +238,7 @@ namespace cpp_lib
             void Deserialize(const Archive& in_archive, size_t& offset, std::vector<T>& out_data)
             {
                 /* 要素数 */
-                size_t size = 0;
+                uint64_t size = 0;
 
                 /* 要素数をデシリアライズ */
                 this->Deserialize(in_archive, offset, size);
@@ -247,7 +247,7 @@ namespace cpp_lib
                 out_data.reserve(size);
 
                 /* 要素数分ループ */
-                for (size_t i = 0; i < size; i++)
+                for (uint64_t i = 0; i < size; i++)
                 {
                     /* 要素 */
                     T item{};
@@ -308,8 +308,8 @@ namespace cpp_lib
             template <typename TKey, typename TValue>
             void Calculate(const std::map<TKey, TValue>& in_data, size_t& out_size)
             {
-                /* 要素数の型(size_t型)のデータサイズを加算 */
-                out_size += sizeof(size_t);
+                /* 要素数の型(uint64_t型)のデータサイズを加算 */
+                out_size += sizeof(uint64_t);
 
                 /* 全要素を走査 */
                 for (const auto& item : in_data)
@@ -339,13 +339,13 @@ namespace cpp_lib
             void Deserialize(const Archive& in_archive, size_t& offset, std::map<TKey, TValue>& out_data)
             {
                 /* 要素数 */
-                size_t size = 0;
+                uint64_t size = 0;
 
                 /* 要素数をデシリアライズ */
                 this->Deserialize(in_archive, offset, size);
 
                 /* 要素数分ループ */
-                for (size_t i = 0; i < size; i++)
+                for (uint64_t i = 0; i < size; i++)
                 {
                     /* キー要素 */
                     TKey key{};
@@ -466,11 +466,11 @@ namespace cpp_lib
             /* 文字列型データサイズ算出 */
             inline void Calculate(const string_t& in_data, size_t& out_size)
             {
-                /* 要素数の型(size_t型)のデータサイズを加算 */
-                out_size += sizeof(size_t);
+                /* 要素数の型(uint64_t型)のデータサイズを加算 */
+                out_size += sizeof(uint64_t);
 
                 /* 要素数算出(文字列の長さ + null文字のサイズ) */
-                size_t data_size = (in_data.size() + sizeof(char));
+                uint64_t data_size = static_cast<uint64_t>(in_data.size() + sizeof(char));
 
                 /* 要素数を加算 */
                 out_size += data_size;
@@ -480,7 +480,7 @@ namespace cpp_lib
             inline void Serialize(const string_t& in_data, size_t& offset, Archive& out_archive)
             {
                 /* 要素数算出(文字列の長さ + null文字のサイズ) */
-                size_t data_size = (in_data.size() + sizeof(char));
+                uint64_t data_size = static_cast<uint64_t>(in_data.size() + sizeof(char));
 
                 /* 要素数をシリアライズ */
                 this->Serialize(data_size, offset, out_archive);
@@ -493,13 +493,13 @@ namespace cpp_lib
             inline void Deserialize(const Archive& in_archive, size_t& offset, string_t& out_data)
             {
                 /* 要素数 */
-                size_t data_size = 0;
+                uint64_t data_size = 0;
 
                 /* 要素数をデシリアライズ */
                 this->Deserialize(in_archive, offset, data_size);
 
                 /* 指定オフセット位置から指定サイズ分文字列データ読み込み */
-                in_archive.Read(out_data, offset, data_size);
+                in_archive.Read(out_data, offset, static_cast<size_t>(data_size));
             }
 
         private:
